@@ -1,0 +1,21 @@
+make:
+    case_status:
+        name: 'Nazwa'
+    court_case:
+        department: 'Oddział'
+        order: 'Zlecenie'
+        insurerPosition: 'Szkoda'
+        caseValue: 'Wartość powstałego sporu'
+        caseStatus: 'Status'
+        insurer: 'TU'
+        faults_kind: 'Rodzaj szkody'
+        faults_number: 'Numer szkody'
+        faultsDate: 'Szkoda z dnia'
+        faultsReceivedDate: 'Zgłoszenie szkody'
+        appealDate: 'Wysłanie wezwania'
+        caseDate: 'Złożenia pozwu'
+        signature: 'Sygnatura akt'
+        lawyer: 'Mecenas'
+        court: 'Sąd'
+        notices: 'Uwagi'
+        worker: 'Odpowiedzialny po stronie serwisu'

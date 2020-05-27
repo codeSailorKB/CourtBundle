@@ -1,0 +1,123 @@
+<div class="row">
+    <div class="col-xs-3 col-lg-2 nopr">
+        <div class="tabs-left">
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="#main" data-toggle="tab">{{ 'name.basic.many'|trans }}</a></li>
+                <li><a href="#files" data-toggle="tab">Pliki</a></li>
+                <li><a href="#calendar" data-toggle="tab">Kalendarz</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <input type="hidden" id="resourceId" value="{{ resource.order.id }}"/>
+    <input type="hidden" id="resource" value="{{ resource.id }}"/>
+    <div class="col-xs-9 col-lg-10 nopl">
+        <div class="tab-wrapper">
+            <div class="tab-content">
+                <div class="tab-pane active" id="main">
+
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="slidelabel clearfix">
+                                <p class="slide-up inline-text">{{ resource.signature }}</p>
+                                <label for="" class="control-label">{{ 'make.court_case.signature'|trans }}</label>
+                            </div>
+                            <div class="slidelabel clearfix">
+                                <p class="slide-up inline-text">{{ resource.status }}</p>
+                                <label for=""
+                                       class="control-label">{{ 'make.court_case.caseStatus'|trans }}</label>
+                            </div>
+                            <div class="slidelabel clearfix">
+                                <p class="slide-up inline-text">{{ resource.department }}</p>
+                                <label for=""
+                                       class="control-label">{{ 'make.court_case.department'|trans }}</label>
+                            </div>
+                            <div class="slidelabel clearfix">
+                                <p class="slide-up inline-text">
+                                    {% if resource.order %}
+                                        <a href="{{ path('serviceorder_show', {id: resource.order.id}) }}">{{ resource.order }}</a>
+                                    {% endif %}
+                                </p>
+                                <label for="" class="control-label">{{ 'make.court_case.order'|trans }}</label>
+                            </div>
+                            <div class="slidelabel clearfix">
+                                <p class="slide-up inline-text">
+                                    {% if resource.insurerPosition %}
+                                        <a href="{{ path('serviceorder_show', {id: resource.insurerPosition.serviceOrder.id}) }}">{{ resource.insurerPosition }}</a>
+                                    {% endif %}
+                                </p>
+                                <label for=""
+                                       class="control-label">{{ 'make.court_case.insurerPosition'|trans }}</label>
+                            </div>
+                            <div class="slidelabel clearfix">
+                                <p class="slide-up inline-text">{{ resource.caseValue|number_format(2,'.', ' ') }}</p>
+                                <label for="" class="control-label">{{ 'make.court_case.caseValue'|trans }}</label>
+                            </div>
+                            <div class="slidelabel clearfix">
+                                <p class="slide-up inline-text">{{ resource.worker }}</p>
+                                <label for="" class="control-label">{{ 'make.court_case.worker'|trans }}</label>
+                            </div>
+                            <div class="slidelabel clearfix">
+                                <p class="slide-up inline-text">{{ resource.lawyer }}</p>
+                                <label for="" class="control-label">{{ 'make.court_case.lawyer'|trans }}</label>
+                            </div>
+                            <div class="slidelabel clearfix">
+                                <p class="slide-up inline-text">{{ resource.court }}</p>
+                                <label for="" class="control-label">{{ 'make.court_case.court'|trans }}</label>
+                            </div>
+                            <div class="slidelabel clearfix">
+                                <p class="slide-up inline-text">{{ resource.notices }}</p>
+                                <label for="" class="control-label">{{ 'make.court_case.notices'|trans }}</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="slidelabel clearfix">
+                                <p class="slide-up inline-text">
+                                    {% if resource.faultsDate is not null %}
+                                        {{ resource.faultsDate|date('Y-m-d') }}
+                                    {% endif %}
+                                </p>
+                                <label for="" class="control-label">{{ 'make.court_case.faultsDate'|trans }}</label>
+                            </div>
+                            <div class="slidelabel clearfix">
+                                <p class="slide-up inline-text">
+                                    {% if resource.faultsReceivedDate is not null %}
+                                        {{ resource.faultsReceivedDate|date('Y-m-d') }}
+                                    {% endif %}
+                                </p>
+                                <label for=""
+                                       class="control-label">{{ 'make.court_case.faultsReceivedDate'|trans }}</label>
+                            </div>
+                            <div class="slidelabel clearfix">
+                                <p class="slide-up inline-text">
+                                    {% if resource.appealDate is not null %}
+                                        {{ resource.appealDate|date('Y-m-d') }}
+                                    {% endif %}
+                                </p>
+                                <label for="" class="control-label">{{ 'make.court_case.appealDate'|trans }}</label>
+                            </div>
+                            <div class="slidelabel clearfix">
+                                <p class="slide-up inline-text">
+                                    {% if resource.caseDate is not null %}
+                                        {{ resource.caseDate|date('Y-m-d') }}
+                                    {% endif %}
+                                </p>
+                                <label for="" class="control-label">{{ 'make.court_case.caseDate'|trans }}</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane" id="files">
+                    {% include 'MakeCourtBundle:CourtCase:tabs/files.html.twig' %}
+                </div>
+                <div class="tab-pane" id="calendar">
+                    {% include 'MakeCourtBundle:CourtCase:tabs/calendar.html.twig' %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% include '@MakeNotification/Event/Modal/eventDetails.html.twig' %}
+{% include 'MakePrintBundle::printChoiceModal.html.twig' with {'type': constant('Make\\PrintBundle\\PrintType::TYPE_COURT'), 'subjectId': resource.id} %}
+

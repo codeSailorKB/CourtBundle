@@ -1,0 +1,10 @@
+Make\CourtBundle\Entity\CourtCase:
+    properties:
+        order:
+            - NotBlank: ~
+        insurerPosition:
+            - NotBlank: ~
+        caseValue:
+            - GreaterThanOrEqual: 0
+    constraints:
+        - Make\CourtBundle\Validator\Constraints\InsurerPosition: ~

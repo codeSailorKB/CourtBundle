@@ -1,0 +1,19 @@
+Make\CourtBundle\Entity\CaseStatus:
+    type: entity
+    table: make_case_status
+    gedmo:
+        loggable: true
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            length: 100
+        sort:
+            type: integer
+            nullable: true
+    lifecycleCallbacks: {  }

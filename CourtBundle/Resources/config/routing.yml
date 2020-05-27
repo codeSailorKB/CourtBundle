@@ -1,0 +1,7 @@
+make_court_case:
+    resource: "@MakeCourtBundle/Resources/config/routing/courtcase.yml"
+    prefix: /
+
+make_case_status:
+    resource: "@MakeCourtBundle/Resources/config/routing/casestatus.yml"
+    prefix: /

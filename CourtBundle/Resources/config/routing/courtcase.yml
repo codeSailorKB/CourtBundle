@@ -1,0 +1,39 @@
+make_court_case:
+    resource: |
+        templates: MakeUiBundle:Crud
+        alias: make.court_case
+        grid: make_court_case
+        permission: true
+        except:
+          - 'index'
+        vars:
+            all:
+                templates:
+                    form: MakeCourtBundle:CourtCase:form.html.twig
+            show:
+                templates:
+                    view: MakeCourtBundle:CourtCase:view.html.twig
+                    javascripts: MakeCourtBundle:CourtCase:javascripts_show.html.twig
+                    additional_buttons: MakeCourtBundle:CourtCase:additional_buttons_show.html.twig
+            create:
+                templates:
+                    javascripts: MakeCourtBundle:CourtCase:additional_js.html.twig
+                    form: MakeCourtBundle:CourtCase:form.html.twig
+            update:
+                templates:
+                    javascripts: MakeCourtBundle:CourtCase:additional_js.html.twig
+                    form: MakeCourtBundle:CourtCase:form.html.twig
+    type: sylius.resource
+
+
+make_court_case_index:
+    path:  /court_cases
+    defaults:
+        enable-filters: true
+        _controller: make.controller.court_case:indexAction
+        _sylius:
+            template: 'MakeCourtBundle:CourtCase:index.html.twig'
+            sortable: true
+            paginate: 25
+            filterable: form
+            filter_form: Make\CourtBundle\Filter\Type\CourtCaseFilterType

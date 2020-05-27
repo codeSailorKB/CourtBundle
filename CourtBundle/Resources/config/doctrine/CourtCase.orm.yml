@@ -1,0 +1,73 @@
+Make\CourtBundle\Entity\CourtCase:
+    type: entity
+    table: make_court_case
+    gedmo:
+        loggable: true
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    manyToOne:
+        status:
+            targetEntity: Make\CourtBundle\Entity\CaseStatus
+            joinColumn:
+                name: case_status_id
+                referencedColumnName: id
+        department:
+            targetEntity: Make\DepartmentBundle\Entity\Department
+            joinColumn:
+                name: department_id
+                referencedColumnName: id
+        order:
+            targetEntity: Make\OrdersBundle\Entity\ServiceOrder
+            joinColumn:
+                name: order_id
+                referencedColumnName: id
+        worker:
+            targetEntity: Make\WorkersBundle\Entity\Worker
+            joinColumn:
+                name: worker_id
+                referencedColumnName: id
+        insurerPosition:
+            targetEntity: Make\OrdersBundle\Entity\InsurerPosition
+            mappedBy: cases
+
+    fields:
+        caseValue:
+            type: float
+        faultsDate:
+            type: date
+            gedmo:
+                - versioned
+        faultsReceivedDate:
+            type: date
+            nullable: true
+            gedmo:
+                - versioned
+        appealDate:
+            type: date
+            nullable: true
+            gedmo:
+                - versioned
+        caseDate:
+            type: date
+            nullable: true
+            gedmo:
+                - versioned
+        signature:
+            type: string
+            nullable: true
+            gedmo:
+                - versioned
+        lawyer:
+            type: string
+            nullable: true
+        court:
+            type: string
+            nullable: true
+        notices:
+            type: text
+            nullable: true
+    lifecycleCallbacks: {  }

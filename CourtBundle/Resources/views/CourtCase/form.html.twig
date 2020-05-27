@@ -1,0 +1,28 @@
+{{ form_errors(form) }}
+
+<div class="row">
+    <div class="col-md-6">
+        {{ form_row(form.signature) }}
+        {{ form_row(form.status) }}
+
+        {{ form_row(form.order) }}
+        {{ form_row(form.insurerPosition) }}
+        {{ form_row(form.caseValue) }}
+        {{ form_row(form.worker) }}
+        {{ form_row(form.lawyer) }}
+        {{ form_row(form.court) }}
+        {{ form_row(form.notices) }}
+    </div>
+    <div class="col-md-3">
+        {{ form_row(form.faultsDate) }}
+        {{ form_row(form.faultsReceivedDate) }}
+        {{ form_row(form.appealDate) }}
+        {{ form_row(form.caseDate) }}
+    </div>
+
+    <div class="hidden">
+        {{ form_row(form.department) }}
+        {{ form_rest(form) }}
+    </div>
+</div>
+

@@ -1,0 +1,19 @@
+make_case_status:
+    resource: |
+        templates: MakeUiBundle:Crud
+        alias: make.case_status
+        grid: make_case_status
+        permission: true
+        vars:
+            all:
+                templates:
+                    form: MakeCourtBundle:CaseStatus:form.html.twig
+            show:
+                templates:
+                    view: MakeCourtBundle:CaseStatus:view.html.twig
+                    additional_buttons: MakeCourtBundle:CaseStatus:additional_buttons.html.twig
+            index:
+                templates:
+                    additional_js: MakeCourtBundle:CaseStatus:additional_js.html.twig
+                    reorder_modal: MakeCourtBundle:CaseStatus:modal_reorder.html.twig
+    type: sylius.resource

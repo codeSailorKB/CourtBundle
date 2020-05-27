@@ -1,0 +1,6 @@
+services:
+
+    make.validator.court_insurer_position:
+        class: Make\CourtBundle\Validator\InsurerPositionValidator
+        tags:
+            - { name: validator.constraint_validator }

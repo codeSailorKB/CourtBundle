@@ -1,0 +1,25 @@
+<script>
+    data = [
+        {% for resource in resources.data %}
+        {
+            name: "{% if resource.name is defined %}{{ resource.name }}{% else %}{{ resource.number }}{% endif %}",
+            field: "name",
+            {% if resource.sort is defined %}
+                id: "{{ resource.id }}",
+                sort: "{{ resource.sort }}"
+            {% else %}
+                {% set positions = filter_positions_by_worker(resource.workers, worker) %}
+                {% if positions|length > 0 %}
+                    id: "{{ positions|first.id }}",
+                    sort: "{{ positions|first.orderSort }}"
+                {% endif %}
+            {% endif %}
+        },
+        {% endfor %}
+    ];
+
+    dataModel ="{{ metadata.parameter('classes').model }}";
+    currentPage = {{ resources.data.currentPage }};
+</script>
+<script src="{{ asset('assets/general/js/slick.js') }}"></script>
+<script src="{{ asset('bundles/makeorders/js/reorder.js') }}"></script>

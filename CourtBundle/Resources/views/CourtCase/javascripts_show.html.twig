@@ -1,0 +1,65 @@
+<script src="{{ asset('bundles/makeupload/js/dropzone.js') }}"></script>
+<script type="text/javascript" src="{{ asset('bundles/makescheduler/js/fullcalendar.js') }}"></script>
+<script src="{{ asset('bundles/makescheduler/js/pl.js') }}"></script>
+<script src="{{ asset('bundles/makenotification/js/event-calendar.js') }}"></script>
+<script src="{{ asset('bundles/makeprint/js/print-choice.js') }}"></script>
+<script type="text/javascript">
+    var startHour = '8';
+    var endHour = '20';
+    var chosenDate = '{{ "now"|date("Y,m,d") }}';
+    (function ($) {
+        'use strict';
+
+        $(document).ready(function () {
+            $('.delete-file').on('click', function () {
+                var position = $(this).parents('.position_file');
+                var deleteId = $(this).attr('delete-id');
+                var deleteFileId = $(this).attr('delete-file-id');
+
+                $.ajax({
+                    type: 'POST',
+                    url: Routing.generate('delete_file_ajax'),
+                    dataType: 'json',
+                    data: {deleteId: deleteId, deleteFileId: deleteFileId}
+                }).done(function () {
+                    position.remove();
+                });
+            });
+
+            var url = $('.files-table').attr('data-url');
+
+            new Dropzone('.dropzone-0', {
+                url: url,
+                dictDefaultMessage: 'Przeciągnij i upuść pliki tutaj lub kliknij',
+                headers: {
+                    entityName: 'court_case',
+                    entityId: $('#resource').val(),
+                },
+                clickable: true,
+                createImageThumbnails: false,
+                previewTemplate: '<div class="dz-prieview"></div>'
+            }).on("success", function (file, xhr, formData) {
+                window.location.reload();
+            });
+
+
+            $('a[href="#calendar"]').on('click', function () {
+                if ($('.calendar-box').data('initialize') == 0) {
+                    setTimeout(function () {
+                        $('.calendar-box').attr('data-initialize', 1);
+                        $('.calendar-box').each(function (index, box) {
+                            initializeCalendar($(box));
+                        })
+                    }, 500);
+
+                    $('.calendar-box').data('initialize', 1);
+                }
+            });
+
+        });
+    })(jQuery);
+
+
+</script>
+<script src="{{ asset('bundles/makenotification/js/calendar-settings.js') }}"></script>
+<script src="{{ asset('bundles/makecore/js/lightbox.js') }}"></script>

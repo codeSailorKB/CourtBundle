@@ -1,0 +1,63 @@
+{% set separator = ',' %}
+
+
+{% for field in exportForm.children %}
+    {% set currentField = field.vars.name %}
+    {% set currentLabel = field.vars.label %}
+
+    {% if currentField in export_cols_available and currentField in export_cols_set|keys %}
+        "{{ currentLabel|trans }}"{{ separator }}
+    {% endif %}
+{% endfor %}
+
+{{ export_eol }}
+
+{% for entity in entities %}
+    {% for field in exportForm.children %}
+        {% set fieldName = field.vars.name %}
+
+        {% if fieldName in export_cols_available and fieldName in export_cols_set|keys %}
+            "
+            {% if fieldName == 'signature' %}
+                {{ entity.signature }}
+            {% elseif fieldName == 'order' %}
+                {% if entity.order %}
+                    {{ entity.order.number }}
+                {% endif %}
+            {% elseif fieldName == 'insurerPosition' %}
+                {% if entity.insurerPosition %}
+                    {{ entity.insurerPosition.faultNumber }}
+                {% endif %}
+            {% elseif fieldName == 'insurer' %}
+                {% if entity.insurerPosition and entity.insurerPosition.insurer %}
+                    {{ entity.insurerPosition.insurer.name }}
+                {% endif %}
+            {% elseif fieldName == 'faults_kind' %}
+                {% if entity.insurerPosition and entity.insurerPosition.faultKind %}
+                    {{ entity.insurerPosition.faultKind.name }}
+                {% endif %}
+            {% elseif fieldName == 'worker' %}
+                {% if entity.worker %}
+                    {{ entity.worker }}
+                {% endif %}
+            {% elseif fieldName == 'appealDate' %}
+                {% if entity.appealDate is not null %}
+                    {{ entity.appealDate|date }}
+                {% endif %}
+            {% elseif fieldName == 'caseDate' %}
+                {% if entity.caseDate is not null %}
+                    {{ entity.caseDate|date }}
+                {% endif %}
+            {% elseif fieldName == 'caseValue' %}
+                {{ entity.caseValue|number_format(2,'.', ' ') }}
+            {% elseif fieldName == 'caseStatus' %}
+                {{ entity.status }}
+            {% elseif fieldName == 'court' %}
+                {{ entity.court }}
+            {% endif %}
+            "
+            {{ separator }}
+        {% endif %}
+    {% endfor %}
+    {{ export_eol }}
+{% endfor %}

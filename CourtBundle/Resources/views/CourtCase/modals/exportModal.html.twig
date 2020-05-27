@@ -1,0 +1,23 @@
+<div class="modal fade case-export-modal" id="caseExportModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">{{ 'make.service_order.export_csv_modal.title'|trans }}</h4>
+            </div>
+            <div class="modal-body clearfix">
+                <form class="form-horizontal case-export-form" action="" method="post">
+                    <div class="col-xs-4">
+                        {{ form(exportForm) }}
+                    </div>
+                   {{ form_rest(exportForm) }}
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">{{ 'views.buttons.close'|trans }}</button>
+                <button type="button" data-export-format="csv" class="btn btn-primary export-case">{{ 'name.exportcsv'|trans }}</button>
+                <button type="button" data-export-format="xls" class="btn btn-primary export-case">{{ 'name.exportxls'|trans }}</button>
+            </div>
+        </div>
+    </div>
+</div>
